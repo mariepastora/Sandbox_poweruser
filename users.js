@@ -24,21 +24,32 @@ function get_page(url) {
   // Retrieving url
   url_tab = url.split("/wiki/")[1]
 
-  // Creating list of all user names + edits
+  // Creating list of all user names + edits + size of edits
   var all_user_names = []
   var number_edits = []
+  var size_edits = []
 
   // XHTML REQUEST
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
+
     // Retrieving all usernames
     table = this.responseXML.getElementsByClassName("top-editors-table")[0]
-    for (i=0, this.responseXML.getElementsByClassName("top-editors-table")[0].getElementsByClassName("sort-entry--username"); i< 20; i++){
-        all_user_names.push(this.responseXML.getElementsByClassName("top-editors-table")[0].getElementsByClassName("sort-entry--username")[i].getAttribute("data-value"))
+    for (i=0, table.getElementsByClassName("sort-entry--username"); i< 20; i++){
+        all_user_names.push(table.getElementsByClassName("sort-entry--username")[i].getAttribute("data-value"))
+    }
+    for (i=0, table.getElementsByClassName("sort-entry--edits"); i<20; i++){
+      number_edits.push(table.getElementsByClassName("sort-entry--edits")[i].getAttribute("data-value"))
+    }
+    for (i=0, table.getElementsByClassName("sort-entry--added-bytes"); i<20; i++){
+      size_edits.push(table.getElementsByClassName("sort-entry--added-bytes")[0].getAttribute("data-value"))
     }
     // Replacing them in HTML document
-    document.getElementById("1var").innerHTML = all_user_names;
+    document.getElementById("1var").innerHTML = all_user_names
+    document.getElementById("2var").innerHTML = number_edits
+    document.getElementById("3var").innerHTML = size_edits
     }
+
   xhr.open("GET", "https://xtools.wmflabs.org/articleinfo/en.wikipedia.org/"+url_tab);
   xhr.responseType = "document";
   xhr.send();
