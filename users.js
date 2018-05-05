@@ -85,7 +85,7 @@ var xhr = new XMLHttpRequest();
 xhr.onload = function() {
   table = this.responseXML.getElementsByClassName("top-editors-table")[0]
   for (i=0, this.responseXML.getElementsByClassName("top-editors-table")[0].getElementsByClassName("sort-entry--username"); i< 20; i++){
-    console.log(this.responseXML.getElementsByClassName("top-editors-table")[0].getElementsByClassName("sort-entry--username")[i])
+      console.log(this.responseXML.getElementsByClassName("top-editors-table")[0].getElementsByClassName("sort-entry--username")[i].getAttribute("data-value"))
   }
   print(table)
 }
