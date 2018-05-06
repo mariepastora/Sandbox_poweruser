@@ -1,36 +1,77 @@
-    body {;
+    body {
       margin: 0px;
       padding: 10px;
       background: #F6F6F6 ;
       font-family:sans-serif;
+      width: 400px;
+
     }
 
-    div:first-child {
-      margin-top: 0px;
-    }
+
 
     h4{
      text-align: center;
      font-size: 1.9em;
      font-weight:normal; 
-     font-family: 'Linux Libertine'
+     font-family: 'Linux Libertine';
+ 
     }
 
     h5{
      font-size: 1.4em;
      font-weight:normal; 
-     font-family: 'Linux Libertine'
+     font-family: 'Linux Libertine';
+     margin-bottom: 17px;
+     margin-top: 17px;
     }
 
     div {
-      cursor: pointer;
-      text-align: center;
-      padding: 1px 3px;
       font-family: sans-serif;
-      font-size: 1.2em;
-      width: 400px;
-      margin-top: 1px;
+      font-size: 1em;
     }
+
+    #container{
+      margin:auto;
+      width:90%;
+    }
+
+    th{
+      font-weight: bold;
+
+    }
+
+    table {
+    border-collapse: collapse;
+    width:100%;
+    margin: auto;
+    font-size: 1.1em;
+    background-color: #F8F9FA;
+    }
+
+    table, th, td {
+        border: 0.5px solid #A2A9B1;
+        height:2em;
+
+    }
+
+    td{
+      text-align: center;
+      padding:4px;
+    }
+
+    span{
+      font-weight:600;
+      font-size: 1em
+    }
+
+    a{
+      color:#0E54BF;
+    }
+
+
+
+
+
     div:hover {
     }
     #red {
@@ -51,5 +92,6 @@
     }
 
     p{
-      font-size:1.3em;
+      font-size:1.1em;
+      padding:0px;
     }

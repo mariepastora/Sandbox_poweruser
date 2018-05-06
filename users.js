@@ -32,7 +32,6 @@ function get_page(url) {
   table_here.createTHead()
 
 
-
   // XHTML REQUEST
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
@@ -49,18 +48,13 @@ function get_page(url) {
       size_edits.push(table.getElementsByClassName("sort-entry--added-bytes")[i].getAttribute("data-value"))
     }
     // Replacing them in HTML document
-    document.getElementById("1var").innerHTML = all_user_names
-    document.getElementById("2var").innerHTML = number_edits
-    document.getElementById("3var").innerHTML = size_edits
 
     for (i=0, all_user_names; i < all_user_names.length; i++){
-      document.getElementsByClassName("cell-1")[i].innerHTML = all_user_names[i]
+      document.getElementsByClassName("link-user")[i].innerHTML = all_user_names[i]
+      document.getElementsByClassName('link-user')[i].href = "https://en.wikipedia.org/wiki/User:" + all_user_names[i];
       document.getElementsByClassName("cell-2")[i].innerHTML = number_edits[i]
       document.getElementsByClassName("cell-3")[i].innerHTML = size_edits[i]
-
     }
-
-
     }
 
   xhr.open("GET", "https://xtools.wmflabs.org/articleinfo/en.wikipedia.org/"+url_tab);
@@ -80,6 +74,38 @@ function get_page(url) {
     }
     return false;
   }
+
+  // Request for getting page creation and number of edits
+
+  var getJSON = function(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        var status = xhr.status;
+        if (status === 200) {
+          callback(null, xhr.response);
+        } else {
+          callback(status, xhr.response);
+        }
+      };
+      xhr.send();
+  };
+
+  getJSON('https://xtools.wmflabs.org/api/page/articleinfo/en.wikipedia.org/'+url_tab,
+  function(err, data) {
+    if (err !== null) {
+      console.log(err);
+    } else {
+      console.log(data);
+        document.getElementById("h5-span-created").innerHTML = data.created_at
+        document.getElementById("h5-span-author").innerHTML = data.author     
+        document.getElementById('h5-span-author').href = "https://en.wikipedia.org/wiki/User:" + data.author; 
+        document.getElementById("h5-span-contributions").innerHTML = data.revisions
+        document.getElementById("h5-span-contributors").innerHTML = data.editors   
+
+    }
+  });
 
 }
 
