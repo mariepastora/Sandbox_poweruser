@@ -28,6 +28,10 @@ function get_page(url) {
   var all_user_names = []
   var number_edits = []
   var size_edits = []
+  var table_here = document.getElementById("myTable");
+  table_here.createTHead()
+
+
 
   // XHTML REQUEST
   var xhr = new XMLHttpRequest();
@@ -42,12 +46,21 @@ function get_page(url) {
       number_edits.push(table.getElementsByClassName("sort-entry--edits")[i].getAttribute("data-value"))
     }
     for (i=0, table.getElementsByClassName("sort-entry--added-bytes"); i<20; i++){
-      size_edits.push(table.getElementsByClassName("sort-entry--added-bytes")[0].getAttribute("data-value"))
+      size_edits.push(table.getElementsByClassName("sort-entry--added-bytes")[i].getAttribute("data-value"))
     }
     // Replacing them in HTML document
     document.getElementById("1var").innerHTML = all_user_names
     document.getElementById("2var").innerHTML = number_edits
     document.getElementById("3var").innerHTML = size_edits
+
+    for (i=0, all_user_names; i < all_user_names.length; i++){
+      document.getElementsByClassName("cell-1")[i].innerHTML = all_user_names[i]
+      document.getElementsByClassName("cell-2")[i].innerHTML = number_edits[i]
+      document.getElementsByClassName("cell-3")[i].innerHTML = size_edits[i]
+
+    }
+
+
     }
 
   xhr.open("GET", "https://xtools.wmflabs.org/articleinfo/en.wikipedia.org/"+url_tab);
